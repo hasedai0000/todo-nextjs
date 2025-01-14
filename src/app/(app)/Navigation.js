@@ -35,6 +35,11 @@ const Navigation = ({ user }) => {
                                 active={usePathname() === '/dashboard'}>
                                 Dashboard
                             </NavLink>
+                            <NavLink
+                                href="/users"
+                                active={usePathname() === '/users'}>
+                                Users
+                            </NavLink>
                         </div>
                     </div>
 
