@@ -17,7 +17,7 @@ const TodoList = () => {
     return (
         <ul>
             {todos?.map(todo => (
-                <li key={todo.id}>{todo.name}</li>
+                <li key={todo.id}>{todo.title}</li>
             ))}
         </ul>
     )

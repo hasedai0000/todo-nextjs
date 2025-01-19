@@ -1,5 +1,6 @@
 import Header from '@/app/(app)/Header'
 import TodoList from '@/components/TodoList'
+import Navigation from './components/Navigation'
 
 export const metadata = {
     title: 'Laravel - Todo',
@@ -8,7 +9,8 @@ export const metadata = {
 const Todo = () => {
     return (
         <>
-            <Header title="User" />
+            <Header title="Todo" />
+            <Navigation />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
