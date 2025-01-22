@@ -23,6 +23,19 @@ export const useTodo = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
+    const getTodos = async () => {
+        await csrf()
+
+        axios
+            .get('/api/todos')
+            .then(res => res.data)
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
     const createTodo = async ({ setErrors, ...props }) => {
         await csrf()
 
@@ -32,6 +45,23 @@ export const useTodo = ({ middleware, redirectIfAuthenticated } = {}) => {
             .post('/api/todos', props)
             .then(() => {
                 router.push('/todos')
+                mutate()
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
+    const deleteTodo = async ({ setErrors, ...props }) => {
+        await csrf()
+
+        setErrors([])
+
+        axios
+            .delete(`/api/todos/${props.id}`)
+            .then(() => {
                 mutate()
             })
             .catch(error => {
@@ -58,6 +88,8 @@ export const useTodo = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     return {
         user,
+        getTodos,
         createTodo,
+        deleteTodo,
     }
 }

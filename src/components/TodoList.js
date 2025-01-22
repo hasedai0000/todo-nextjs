@@ -5,7 +5,7 @@ import axios from '@/lib/axios'
 import { Trash2 } from 'lucide-react'
 import { useMemo } from 'react'
 
-const TodoList = ({ searchKeyword }) => {
+const TodoList = ({ searchKeyword, onClickDeleteTodo }) => {
     const { data: todos, error } = useSWR('/api/todos', () =>
         axios
             .get('/api/todos')
@@ -40,7 +40,8 @@ const TodoList = ({ searchKeyword }) => {
                     </label>
                     <button
                         type="button"
-                        className="rounded bg-gray-200 p-2 transition-colors hover:bg-gray-300">
+                        className="rounded bg-gray-200 p-2 transition-colors hover:bg-gray-300"
+                        onClick={() => onClickDeleteTodo(todo.id)}>
                         <Trash2 className="size-5 text-gray-500" />
                     </button>
                 </div>
